@@ -1,7 +1,7 @@
 # wnucheck-mvp
 WnuCheck MVP
 
-## Setup
+## Backend Setup
 
 To run this project, you need to configure environment variables.
 
