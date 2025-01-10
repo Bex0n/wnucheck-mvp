@@ -1,0 +1,40 @@
+# -----------------------
+# SECRETS
+# -----------------------
+.env
+
+# -----------------------
+# PYTHON VIRTUAL ENVIRONMENTS
+# -----------------------
+venv/
+.venv/
+backend_venv/
+
+# -----------------------
+# PYTHON BYTE-CODE AND CACHES
+# -----------------------
+**/__pycache__/
+**/*.py[cod]
+*.egg-info
+*.egg
+.pytest_cache/
+
+# -----------------------
+# EDITORS & IDEs
+# -----------------------
+.vscode/
+.idea/
+
+# -----------------------
+# BUILD & DISTRIBUTION
+# -----------------------
+build/
+dist/
+*.egg-info/
+*.wheel
+
+# -----------------------
+# MISC
+# -----------------------
+.DS_Store
+Thumbs.db

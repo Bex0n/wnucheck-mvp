@@ -15,7 +15,8 @@ class ContentScamRequest(BaseModel):
     sender_email: str = None
 
 
-class EmailHeaderRequest(BaseModel):
+class EmailRequest(BaseModel):
+    content: str
     email_headers: Dict[str, str]
     message_id: str
     attachments: bool
