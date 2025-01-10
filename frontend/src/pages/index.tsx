@@ -20,14 +20,19 @@ export default function Home() {
     >
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
         <SmartPhone>
-          <Image
-            className="dark:invert"
-            src="/next.svg"
-            alt="Next.js logo"
-            width={180}
-            height={38}
-            priority
-          />
+          <div className="flex flex-col items-center gap-4">
+            <Image
+              className="mt-10 self-center"
+              src="/next.svg"
+              alt="Next.js logo"
+              width={180}
+              height={38}
+              priority
+            />
+            <h1 className="text-3xl font-bold text-center mt-4">
+              Wnucheck
+            </h1>
+          </div>
         </SmartPhone>
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
