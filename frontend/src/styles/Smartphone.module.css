@@ -68,12 +68,13 @@ body {
 
 
 
-  width: 295px;
-  height: 532px;
+  width: 395px;
+  height: 832px;
   border-radius: 40px;
   border: 2px solid #ddd;
   margin: 0 auto;
   padding: 60px 10px;
+  padding-top: 30px;
 
   position: relative;
 
@@ -163,8 +164,9 @@ body {
 
 
 .schermo {
-  height: 372px;
-  width: 270px;
+  margin-top: 20px;
+  height: 93%;
+  width: 100%;
   background-color: #fff;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1)inset;
   overflow: hidden;
