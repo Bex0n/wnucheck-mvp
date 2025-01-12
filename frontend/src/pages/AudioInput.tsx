@@ -11,9 +11,7 @@ type AudioInputProps = {
 
 const AudioInput: React.FC<AudioInputProps> = ({ phoneNumber: phone_number, callType: call_type, callerId: caller_id, onCheckResult }) => {
   const [isRecording, setIsRecording] = useState(false);
-  const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const mediaRecorderRef : React.RefObject<MediaRecorder | null> = useRef(null); // Use ref to persist mediaRecorder state
   const audioChunks : React.RefObject<Blob[]> = useRef([]); // To store audio chunks during recording
 
@@ -35,7 +33,7 @@ const AudioInput: React.FC<AudioInputProps> = ({ phoneNumber: phone_number, call
 
         mediaRecorder.onstop = () => {
           const audioBlob = new Blob(audioChunks.current, { type: "audio/mp3" });
-          setAudioBlob(audioBlob);
+          sendAudio(audioBlob);
         };
 
         mediaRecorder.start();
@@ -52,14 +50,13 @@ const AudioInput: React.FC<AudioInputProps> = ({ phoneNumber: phone_number, call
     if (mediaRecorder) {
       mediaRecorder.stop();
       setIsRecording(false);
-      sendAudio();
     } else {
       console.error("MediaRecorder is not initialized.");
     }
   };
 
   // Send audio to the server
-  const sendAudio = async () => {
+  const sendAudio = async (audioBlob:Blob) => {
     if (!audioBlob) return;
 
     const formData = new FormData();
@@ -100,23 +97,7 @@ const AudioInput: React.FC<AudioInputProps> = ({ phoneNumber: phone_number, call
         )}
       </div>
 
-      {/* {audioBlob && !isLoading && (
-        <div>
-          <button onClick={sendAudio}>Send Audio for Check</button>
-        </div>
-      )} */}
-
       {isLoading && <p>Uploading...</p>}
-
-      {/* {response && (
-        <div>
-          <h3>Reputation Check Result</h3>
-          <p><strong>Is Scam:</strong> {response.is_scam ? "Yes" : "No"}</p>
-          <p><strong>Reputation Score:</strong> {response.reputation_score}</p>
-          <p><strong>Reported Count:</strong> {response.reported_count}</p>
-          <p><strong>Last Reported:</strong> {response.last_reported}</p>
-        </div>
-      )} */}
     </div>
   );
 };
