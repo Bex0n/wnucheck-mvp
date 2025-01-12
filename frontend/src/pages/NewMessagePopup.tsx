@@ -29,7 +29,7 @@ const NewMessagePopup: React.FC<PopupProps> = ({data, dismiss}) => {
         </div>
         <div className="p-4">
           <div className="text-xl font-medium text-black">{data?.messageTitle}</div>
-          <p className="text-slate-500">{data?.messageContent}</p>
+          <p className="text-slate-500 text-wrap">{data?.messageContent}</p>
         </div>
       </div>
     </div>
