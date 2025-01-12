@@ -49,7 +49,7 @@ app.add_middleware(
 )
 
 
-@app.post("/phone-reputation-check")
+@app.post("/phone-call-check")
 async def phone_reputation_check(
     request: PhoneReputationRequest = Depends(),
     audio: UploadFile = File(...),
@@ -75,9 +75,9 @@ async def phone_reputation_check(
     return response
 
 
-@app.post("/content-scam-detection")
-def content_scam_detection(request: ContentScamRequest):
-    """Mocked content scam detection."""
+@app.post("/message-content-check")
+def message_scam_detection(request: ContentScamRequest):
+    """Message scam detection."""
     message = TextFraudDetectorMessage(request.content)
     response = fraud_detector.run(message)
     logger.info("Agent decision: %s", response.decision)
@@ -90,9 +90,9 @@ def content_scam_detection(request: ContentScamRequest):
     return response
 
 
-@app.post("/email-header-check")
-def email_header_check(request: EmailRequest):
-    """Mocked email header check."""
+@app.post("/email-content-check")
+def content_email_detection(request: EmailRequest):
+    """Email content check."""
     message = TextFraudDetectorMessage(request.content)
     response = fraud_detector.run(message)
     logger.info("Agent decision: %s", response.decision)

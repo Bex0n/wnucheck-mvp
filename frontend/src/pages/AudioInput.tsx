@@ -62,7 +62,7 @@ const AudioInput: React.FC<AudioInputProps> = ({ phoneNumber: phone_number, call
       setIsLoading(true);
 
       setIsLoading(true);
-      const res = await axios.post("http://127.0.0.1:8000/phone-reputation-check", formData, {
+      const res = await axios.post("http://127.0.0.1:8000/phone-call-check", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
