@@ -2,7 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import SmartPhone from "@/pages/Smartphone"
 import IncomingCallScreen from "./IncomingCallScreen";
 import { useState } from 'react';
-import NewMessagePopup from "./NewMessagePopup";
+import NewMessagePopup, { PopupData } from "./NewMessagePopup";
 import ChatWindow from "./ChatWindow";
 
 
@@ -18,7 +18,17 @@ const geistMono = Geist_Mono({
 });
 
 export default function Home() {
-  const [getScreenType, setScreenType] = useState("homescreen");
+  const [screenType, setScreenType] = useState("incomingcall");
+  const [popup, setPopup] = useState(null);
+
+  const samplePopupData: PopupData = {
+    title: "Nowa wiadomość",
+    warningTitle: "Uwaga!",
+    warningContent: "Numer nadawcy jest niezaufany. To może być próba oszustwa",
+    messageTitle: "213 721 372",
+    messageContent: "Hej dziadku, tu wnuczek pilnie potrzebuje pieniedzy przekazesz mi 2000zl prosze????!!",
+  };
+  
 
   return (
     <div
@@ -27,11 +37,13 @@ export default function Home() {
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
         <ChatWindow />
         {/* not intended to be left this way, just collecting these phone layouts in one place */}
-        <SmartPhone popup={(<NewMessagePopup />)}>
-          <IncomingCallScreen />
+        <SmartPhone popup=
+          {popup != null && (<NewMessagePopup data={popup}/>)}
+          >
+        {screenType === "incomingcall" && <IncomingCallScreen />}
         </SmartPhone>
         <SmartPhone>
-          <NewMessagePopup />
+          <NewMessagePopup data={samplePopupData}/>
         </SmartPhone>
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
