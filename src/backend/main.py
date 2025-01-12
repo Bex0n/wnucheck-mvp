@@ -6,7 +6,6 @@ from dotenv import load_dotenv
 from fastapi import Depends, FastAPI, File, Form, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 
-
 from backend.agents.phone_scam_agent import PhoneScamAgent, PhoneScamAgentMessage
 from backend.agents.text_fraud_agent import TextFraudDetector, TextFraudDetectorMessage
 from backend.llm.exalome import ExalomeLLM
@@ -65,10 +64,10 @@ async def phone_reputation_check(
 
     response = {
         "is_scam": True if response.decision == "Fraudulent" else False,
-        "reputation_score": 2,
-        "reported_count": 54,
-        "scam_types": ["scam"],
-        "last_reported": "2025-01-08T15:20:00Z",
+        "reputation_score": 2,  # available in full version
+        "reported_count": 54,  # available in full version
+        "scam_types": ["scam"],  # available in full version
+        "last_reported": "2025-01-08T15:20:00Z",  # available in full version
     }
 
     os.remove(temp_path)
@@ -84,9 +83,9 @@ def content_scam_detection(request: ContentScamRequest):
     logger.info("Agent decision: %s", response.decision)
     response = {
         "is_scam": True if response.decision == "Fraudulent" else False,
-        "scam_probability": 0,
-        "detected_patterns": ["scam"],
-        "suggested_action": "Block sender and report",
+        "scam_probability": 0,  # available in full version
+        "detected_patterns": ["scam"],  # available in full version
+        "suggested_action": "Block sender and report",  # available in full version
     }
     return response
 
@@ -99,12 +98,12 @@ def email_header_check(request: EmailRequest):
     logger.info("Agent decision: %s", response.decision)
     response = {
         "is_scam": True if response == "Fraudulent" else False,
-        "detected_issues": [
+        "detected_issues": [  # available in full version
             "spoofed_sender_domain",
             "mismatched_ip_address",
             "urgent_language",
         ],
-        "suggested_action": "Mark as phishing",
-        "additional_info": "Sender domain 'suspiciousdomain.com' is flagged in DNSBL",
+        "suggested_action": "Mark as phishing",  # available in full version
+        "additional_info": "Sender domain 'suspiciousdomain.com' is flagged in DNSBL",  # available in full version
     }
     return response
