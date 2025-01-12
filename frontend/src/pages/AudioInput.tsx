@@ -20,6 +20,10 @@ const AudioInput: React.FC<AudioInputProps> = ({ phoneNumber: phone_number, call
 
   // Start recording
   const startRecording = async () => {
+    if (typeof window === "undefined" || !navigator.mediaDevices) {
+      console.error("MediaDevices API not available");
+      return;
+    }
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -75,14 +79,13 @@ const AudioInput: React.FC<AudioInputProps> = ({ phoneNumber: phone_number, call
         }
       });
       setResponse(res.data);
+      onCheckResult(response);
     } catch (error) {
       console.error("Error uploading audio:", error);
     } finally {
       setIsLoading(false);
     }
   };
-
-  onCheckResult(response);
 
   return (
     <div>
