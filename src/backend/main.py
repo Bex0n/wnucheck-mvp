@@ -26,8 +26,8 @@ load_dotenv(dotenv_path=".env")
 COSTLESS = os.getenv("COSTLESS", "false").lower() == "true"
 GPU = os.getenv("GPU", "false").lower() == "true"
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-if COSTLESS and not OPENAI_API_KEY:
-    raise ValueError("OPENAI_API_KEY must be set when COSTLESS is true.")
+if not COSTLESS and not OPENAI_API_KEY:
+    raise ValueError("OPENAI_API_KEY must be set when COSTLESS is false.")
 
 # Initialize LLM
 device = "cuda" if GPU else "cpu"
