@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { PopupData } from "./NewMessagePopup";
+import axios, { AxiosError } from "axios";
 
 type ChatWindowProps = {
   onChatMessage: (message: PopupData) => void;
@@ -11,16 +12,33 @@ const ChatWindow: React.FC<ChatWindowProps> = ({onChatMessage}) => {
   const [inputValue, setInputValue] = useState("");
 
     // {/* Simple Chat Window */}
-  const sendMessage = () => {
+  const sendMessage = async () => {
     if (inputValue.trim() === "") return; // Prevent sending empty messages
 
     const messagePopupData: PopupData = {
       title: "Nowa wiadomość",
-      warningTitle: "Uwaga!",
-      warningContent: "Numer nadawcy jest niezaufany. To może być próba oszustwa",
+      warningTitle: "???",
+      warningContent: "???",
       messageTitle: "213 721 372",
       messageContent: inputValue,
+    };
+
+    try {
+      const response = await axios.post("/content-scam-detection", {
+            content: inputValue,
+          });
+      messagePopupData.warningTitle = response.data.is_scam ? "Uwaga!" : "";
+      messagePopupData.warningContent = response.data.is_scam
+        ? "Numer nadawcy jest niezaufany. To może być próba oszustwa"
+        : "";
+    } catch (error: AxiosError) {
+      if (error.response?.status === 404) {
+        console.error("Endpoint not found:", error.response?.data);
+      } else {
+        console.error("Request failed:", error);
+      }
     }
+    
     onChatMessage(messagePopupData);
     setInputValue("");
   }
