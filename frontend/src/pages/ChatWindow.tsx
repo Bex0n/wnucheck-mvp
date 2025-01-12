@@ -24,8 +24,11 @@ const ChatWindow: React.FC<ChatWindowProps> = ({onChatMessage}) => {
     };
 
     try {
-      const response = await axios.post("/content-scam-detection", {
-            content: inputValue,
+      const response = await axios.post("http://127.0.0.1:8000/content-scam-detection", {
+            content: inputValue,  
+            message_type: "SMS",
+            sender_email: ""
+          
           });
       messagePopupData.warningTitle = response.data.is_scam ? "Uwaga!" : "";
       messagePopupData.warningContent = response.data.is_scam

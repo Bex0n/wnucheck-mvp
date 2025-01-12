@@ -4,6 +4,8 @@ import tempfile
 
 from dotenv import load_dotenv
 from fastapi import Depends, FastAPI, File, Form, UploadFile
+from fastapi.middleware.cors import CORSMiddleware
+
 
 from backend.agents.phone_scam_agent import PhoneScamAgent, PhoneScamAgentMessage
 from backend.agents.text_fraud_agent import TextFraudDetector, TextFraudDetectorMessage
@@ -39,6 +41,15 @@ phone_scam_agent = PhoneScamAgent(llm=llm, stt=stt)
 app = FastAPI()
 
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all origins, adjust as needed
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all HTTP methods (GET, POST, etc.)
+    allow_headers=["*"],  # Allows all headers
+)
+
+
 @app.post("/phone-reputation-check")
 async def phone_reputation_check(
     request: PhoneReputationRequest = Depends(),
@@ -72,7 +83,7 @@ def content_scam_detection(request: ContentScamRequest):
     response = fraud_detector.run(message)
     logger.info("Agent decision: %s", response.decision)
     response = {
-        "is_scam": True if response == "Fraudulent" else False,
+        "is_scam": True if response.decision == "Fraudulent" else False,
         "scam_probability": 0,
         "detected_patterns": ["scam"],
         "suggested_action": "Block sender and report",
