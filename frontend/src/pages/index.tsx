@@ -48,7 +48,7 @@ export default function Home() {
 
           <div className="flex flex-col gap-8">
             <ChatWindow onChatMessage={setPopup} />
-            <DialKeypad onCallPress={incomingCallCallback} />
+            {screenType !== "call" && <DialKeypad onCallPress={incomingCallCallback} />}
             {screenType === "call" && <AudioInput phoneNumber={incomingNumber} callType={"???"} callerId={"???"} onCheckResult={setCheckResult}/>}
           </div>
         </div>
