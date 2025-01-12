@@ -23,11 +23,11 @@ const IncomingCallScreen: React.FC<IncomingCallScreenProps> = ({ onAnswerCall, o
           <p className="text-xl text-slate-800 mt-1">Tego numeru nie ma w twojej skrzynce telefonicznej. To może być oszust. Zachowaj czujność.</p>
         </div>
       </div>
-      <div className="flex-auto flex space-x-4">
-        <button onClick={onAnswerCall} className="h-40 px-10 font-semibold rounded-md bg-slate-600 text-white hover:bg-slate-900 shadow-lg" type="submit">
+      <div className="flex space-x-4 text-3xl font-bold">
+        <button onClick={onAnswerCall} className="h-40 p-4 font-bold border border-black rounded-md shadow-lg hover:bg-gray-300" type="submit">
           Odbierz
         </button>
-        <button onClick={onDenyCall} className="h-40 px-10 font-semibold rounded-md border border-red-700 text-red-700 hover:bg-red-900 hover:text-white shadow-lg" type="button">
+        <button onClick={onDenyCall} className="font-semibold p-4 rounded-md border border-black shadow-lg hover:bg-gray-300" type="button">
           Odrzuć
         </button>
       </div>

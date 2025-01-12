@@ -5,7 +5,7 @@ import { useState } from 'react';
 import NewMessagePopup, { PopupData } from "./NewMessagePopup";
 import ChatWindow from "./ChatWindow";
 import HomeScreen from "./HomeScreen";
-import CallScreen from "./CallScreen";
+import CallScreen, { CallData } from "./CallScreen";
 import DialKeypad from "./DialKeypad";
 import AudioInput from "./AudioInput";
 
@@ -20,13 +20,13 @@ const geistMono = Geist_Mono({
 });
 
 export default function Home() {
-  const [screenType, setScreenType] = useState("incomingcall");
+  const [screenType, setScreenType] = useState("homescreen");
   const [popup, setPopup] = useState(null);
-  const [incomingNumber, setIncomingNumber] = useState("213 721 372");
+  const [incomingNumber, setIncomingNumber] = useState(213721372);
 
-  const incomingCallCallback = (data) => {
+  const incomingCallCallback = (data: CallData) => {
     setScreenType("incomingcall");
-    setIncomingNumber(data.phoneNumber);
+    setIncomingNumber(data.phonenum);
   }
   const answerCallCallback = () => {
     setScreenType("call");
@@ -57,7 +57,7 @@ export default function Home() {
             {popup != null && (<NewMessagePopup dismiss={() => setPopup(null)} data={popup} />)}
           >
             {screenType === "incomingcall" && <IncomingCallScreen phoneNumber={incomingNumber} onAnswerCall={answerCallCallback} onDenyCall={denyCallCallback} />}
-            {screenType === "call" && <CallScreen />}
+            {screenType === "call" && <CallScreen phonenum={incomingNumber} />}
             {screenType === "homescreen" && <HomeScreen />}
           </SmartPhone>
         </div>
