@@ -20,9 +20,20 @@ To run the frontend, refer to the `README` in the `frontend/` directory.
 
 The backend of WnuCheck offers the following core functionalities:
 
-- **Fraud Detection for Conversations**: The backend evaluates audio recordings or text-based conversations to determine if they contain fraudulent elements.
+- **Fraud Detection for Conversations**: The backend evaluates audio recordings to determine if they contain fraudulent elements.
 - **SMS Fraud Detection**: Text messages are analyzed to identify potential scams or phishing attempts.
 
+### Backend Modes
+
+The backend can operate in two distinct modes, configurable via the `.env` file:
+
+1. **Local Inference Mode**:
+   - Uses an open-source model for fraud detection, running locally on your machine.
+   - Supports GPU acceleration for faster inference if a compatible GPU is available and configured.
+
+2. **API-based Mode**:
+   - Leverages external API calls (OpenAI) for fraud detection.
+   - Requires an API key, which should be provided in the `.env` file as `OPENAI_API_KEY`.
 
 ## Backend Setup
 
