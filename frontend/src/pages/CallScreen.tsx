@@ -1,8 +1,8 @@
-// components/CallScreen.tsx
+import { useState } from 'react';
 
 type CallData = {
   phonenum: number;
-  onHangUp?: () => void;
+  onHangUp: () => void;
   scamCheckResult?: {
     is_scam: boolean;
   };
@@ -10,8 +10,9 @@ type CallData = {
 
 const CallScreen: React.FC<CallData> = ({phonenum, onHangUp, scamCheckResult}) => {
   let body;
+  const [ignoreScam, setIgnoreScam] = useState(false);
 
-  if (scamCheckResult?.is_scam) {
+  if (scamCheckResult?.is_scam && !ignoreScam) {
     body = (<div className="flex flex-col gap-6">
       <div className="p-6 mt-4 max-w-sm mx-auto bg-red-300 border-4 border-red-600 rounded-xl shadow-lg flex items-center">
         <div>
@@ -22,10 +23,10 @@ const CallScreen: React.FC<CallData> = ({phonenum, onHangUp, scamCheckResult}) =
       </div>
       <div className="text-xl text-black text-center">Czy chcesz kontynuować rozmowę?</div>
       <div className="flex-auto flex space-x-4 font-semibold mx-auto">
-        <button className="h-40 px-4 rounded-md border border-red-700 text-red-700 hover:bg-red-900 hover:text-white shadow-lg" type="button">
+        <button onClick={() => setIgnoreScam(true)} className="h-40 px-4 rounded-md border border-red-700 text-red-700 hover:bg-red-900 hover:text-white shadow-lg" type="button">
           TAK. Kontynuuj
         </button>
-        <button className="h-40 px-4 rounded-md border border-green-700 text-green-700 hover:bg-green-900 hover:text-white shadow-lg" type="button">
+        <button onClick={() => {onHangUp(); setIgnoreScam(false)}} className="h-40 px-4 rounded-md border border-green-700 text-green-700 hover:bg-green-900 hover:text-white shadow-lg" type="button">
           NIE. Rozłącz się
         </button>
       </div>
