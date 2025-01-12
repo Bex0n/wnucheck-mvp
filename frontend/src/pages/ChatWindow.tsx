@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { PopupData } from "./NewMessagePopup";
-import axios, { AxiosError } from "axios";
 
 type ChatWindowProps = {
   onChatMessage: (message: PopupData) => void;
@@ -36,12 +35,8 @@ const ChatWindow: React.FC<ChatWindowProps> = ({onChatMessage}) => {
       messagePopupData.warningContent = response.data.is_scam
         ? "Wiadomość wykryta jako niebezpieczna. To może być próba oszustwa"
         : "Numer nadawcy jest niezaufany. Bądź czujny";
-    } catch (error: AxiosError) {
-      if (error.response?.status === 404) {
-        console.error("Endpoint not found:", error.response?.data);
-      } else {
-        console.error("Request failed:", error);
-      }
+    } catch (error) {
+      console.error("Request failed:", error);
     }
 
     onChatMessage(messagePopupData);

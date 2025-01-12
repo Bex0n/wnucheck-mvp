@@ -2,7 +2,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import SmartPhone from "@/pages/Smartphone";
 import IncomingCallScreen from "./IncomingCallScreen";
 import { useState } from 'react';
-import NewMessagePopup, { PopupData } from "./NewMessagePopup";
 import ChatWindow from "./ChatWindow";
 import HomeScreen from "./HomeScreen";
 import CallScreen, { CallData } from "./CallScreen";

@@ -11,16 +11,16 @@ const HomeScreen: React.FC = () => {
           ["Podlej kwiaty",
             "Zapłać rachunki",
             "Odwiedź wnuki",
-          ], (v, _) => (
-            <div className="text-3xl p-4">
+          ], (v) => (
+            <div className="text-3xl p-4" key={v}>
               {v}
             </div>
           ))}
       </div>
       <div className="flex-auto flex text-3xl font-semibold mx-auto mt-4 grid grid-cols-2 gap-4">
         {Array.from(
-          ["Telefon", "SMS", "Radio", "Budzik"], (v, _) => (
-            <button className="h-20 px-4 rounded-md border border-slate-600 text-black hover:bg-slate-900 hover:text-white shadow-lg" type="submit">
+          ["Telefon", "SMS", "Radio", "Budzik"], (v) => (
+            <button className="h-20 px-4 rounded-md border border-slate-600 text-black hover:bg-slate-900 hover:text-white shadow-lg" type="submit" key={v}>
               {v}
             </button>
           ))}
