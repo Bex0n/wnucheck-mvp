@@ -1,6 +1,6 @@
 #!/bin/bash
 
-npm run dev &
+npm start --prefix ./frontend &
 
 uvicorn backend.main:app --reload --port 8000 &
 

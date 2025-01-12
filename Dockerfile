@@ -5,7 +5,8 @@ RUN apt install python3-pip uvicorn python3.11-venv dotenv -y
 
 COPY frontend/package.json  frontend/package-lock.json ./
 RUN npm install
-COPY frontend/. ./
+COPY frontend/. ./frontend/.
+RUN npm run build --prefix ./frontend/
 
 COPY pyproject.toml ./
 COPY src/backend/. ./src/backend/.
@@ -17,5 +18,8 @@ ENV PATH="/backend_venv/bin:$PATH"
 RUN . backend_venv/bin/activate
 RUN python3 -m pip install --upgrade pip setuptools
 RUN python3 -m pip install -e . -v
+
+EXPOSE 3000
+EXPOSE 8000
 
 CMD ./run.sh
