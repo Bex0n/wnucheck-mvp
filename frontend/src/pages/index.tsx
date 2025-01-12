@@ -1,13 +1,12 @@
 import { Geist, Geist_Mono } from "next/font/google";
-import SmartPhone from "@/pages/Smartphone"
+import SmartPhone from "@/pages/Smartphone";
 import IncomingCallScreen from "./IncomingCallScreen";
 import { useState } from 'react';
 import NewMessagePopup, { PopupData } from "./NewMessagePopup";
 import ChatWindow from "./ChatWindow";
 import HomeScreen from "./HomeScreen";
 import CallScreen from "./CallScreen";
-
-
+import DialKeypad from "./DialKeypad";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -40,21 +39,27 @@ export default function Home() {
 
   return (
     <div
-      className={`${geistSans.variable} ${geistMono.variable} grid grid-rows-[20px_1fr_20px] items-center  min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]`}
+      className={`${geistSans.variable} ${geistMono.variable} grid grid-rows-[20px_1fr_20px] items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]`}
     >
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <ChatWindow onChatMessage={setPopup}/>
+      <main className="grid grid-cols-3 gap-8 row-start-2 items-start w-full">
+        <div className="col-span-1 flex flex-col gap-8">
+	        <ChatWindow onChatMessage={setPopup}/>
+	        <DialKeypad/>
+	</div>
         {/* not intended to be left this way, just collecting these phone layouts in one place */}
-        <SmartPhone popup=
-          {popup != null && (<NewMessagePopup dismiss={()=>setPopup(null)} data={popup}/>)}
-          >
-        {screenType === "incomingcall" && <IncomingCallScreen onAnswerCall={answerCallCallback} onDenyCall={denyCallCallback}/>}
-        {screenType === "call" && <CallScreen />}
-        {screenType === "homescreen" && <HomeScreen />}
-        </SmartPhone>
-        <SmartPhone>
-          <NewMessagePopup data={samplePopupData}/>
-        </SmartPhone>
+	<div className="col-span-1 flex flex-col items-center gap-8">
+        	<SmartPhone popup=
+        	  {popup != null && (<NewMessagePopup dismiss={()=>setPopup(null)} data={popup}/>)}
+        	  >
+        	{screenType === "incomingcall" && <IncomingCallScreen onAnswerCall={answerCallCallback} onDenyCall={denyCallCallback}/>}
+        	{screenType === "call" && <CallScreen />}
+        	{screenType === "homescreen" && <HomeScreen />}
+        	</SmartPhone>
+        	<SmartPhone>
+        	  <NewMessagePopup data={samplePopupData}/>
+        	</SmartPhone>
+	</div>
+
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
         Footer
@@ -62,3 +67,4 @@ export default function Home() {
     </div>
   );
 }
+
