@@ -1,5 +1,28 @@
 # wnucheck-mvp
-WnuCheck MVP
+
+WnuCheck is an MVP application designed to help protect individuals, especially seniors, from fraud attempts. It leverages advanced AI models to evaluate whether a given conversation or SMS is fraudulent, providing a layer of protection against scams.
+
+**Main app view:**
+![general overview](./assets/screenshot1.png)
+
+**Fraud detection for messages:**
+![send sms](./assets/screenshot2.png)
+
+**Phone call fraud detection:**
+![phonecall](./assets/screenshot3.png)
+
+
+## Frontend Setup
+
+To run the frontend, refer to the `README` in the `frontend/` directory.
+
+## Backend Functionalities
+
+The backend of WnuCheck offers the following core functionalities:
+
+- **Fraud Detection for Conversations**: The backend evaluates audio recordings or text-based conversations to determine if they contain fraudulent elements.
+- **SMS Fraud Detection**: Text messages are analyzed to identify potential scams or phishing attempts.
+
 
 ## Backend Setup
 
