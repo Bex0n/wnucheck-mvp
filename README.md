@@ -29,7 +29,7 @@ pip install -e .
 To run the fastapi server, you can use the following command:
 
 ```bash
-uvicorn src/backend/main:app --reload --port 8000
+uvicorn backend.main:app --reload --port 8000
 ```
 
 ### 4. Access the API
