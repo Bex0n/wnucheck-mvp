@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 type CallData = {
   phonenum: number;
-  onHangUp: () => void;
+  onHangUp?: () => void;
   scamCheckResult?: {
     is_scam: boolean;
   };
@@ -26,7 +26,7 @@ const CallScreen: React.FC<CallData> = ({phonenum, onHangUp, scamCheckResult}) =
         <button onClick={() => setIgnoreScam(true)} className="h-40 px-4 rounded-md border border-red-700 text-red-700 hover:bg-red-900 hover:text-white shadow-lg" type="button">
           TAK. Kontynuuj
         </button>
-        <button onClick={() => {onHangUp(); setIgnoreScam(false)}} className="h-40 px-4 rounded-md border border-green-700 text-green-700 hover:bg-green-900 hover:text-white shadow-lg" type="button">
+        <button onClick={() => {if (onHangUp)onHangUp(); setIgnoreScam(false)}} className="h-40 px-4 rounded-md border border-green-700 text-green-700 hover:bg-green-900 hover:text-white shadow-lg" type="button">
           NIE. Rozłącz się
         </button>
       </div>
