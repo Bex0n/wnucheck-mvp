@@ -49,6 +49,7 @@ const AudioInput: React.FC<AudioInputProps> = ({ phoneNumber: phone_number, call
     if (mediaRecorder) {
       mediaRecorder.stop();
       setIsRecording(false);
+      sendAudio();
     } else {
       console.error("MediaRecorder is not initialized.");
     }
@@ -98,15 +99,15 @@ const AudioInput: React.FC<AudioInputProps> = ({ phoneNumber: phone_number, call
         )}
       </div>
 
-      {audioBlob && !isLoading && (
+      {/* {audioBlob && !isLoading && (
         <div>
           <button onClick={sendAudio}>Send Audio for Check</button>
         </div>
-      )}
+      )} */}
 
       {isLoading && <p>Uploading...</p>}
 
-      {response && (
+      {/* {response && (
         <div>
           <h3>Reputation Check Result</h3>
           <p><strong>Is Scam:</strong> {response.is_scam ? "Yes" : "No"}</p>
@@ -114,7 +115,7 @@ const AudioInput: React.FC<AudioInputProps> = ({ phoneNumber: phone_number, call
           <p><strong>Reported Count:</strong> {response.reported_count}</p>
           <p><strong>Last Reported:</strong> {response.last_reported}</p>
         </div>
-      )}
+      )} */}
     </div>
   );
 };
