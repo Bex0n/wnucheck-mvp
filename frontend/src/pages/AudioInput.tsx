@@ -14,7 +14,6 @@ const AudioInput: React.FC<AudioInputProps> = ({ phoneNumber: phone_number, call
   const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [response, setResponse] = useState<any>(null);
   const mediaRecorderRef : React.RefObject<MediaRecorder | null> = useRef(null); // Use ref to persist mediaRecorder state
   const audioChunks : React.RefObject<Blob[]> = useRef([]); // To store audio chunks during recording
 
@@ -78,8 +77,7 @@ const AudioInput: React.FC<AudioInputProps> = ({ phoneNumber: phone_number, call
           caller_id: caller_id,
         }
       });
-      setResponse(res.data);
-      onCheckResult(response);
+      onCheckResult(res.data);
     } catch (error) {
       console.error("Error uploading audio:", error);
     } finally {
