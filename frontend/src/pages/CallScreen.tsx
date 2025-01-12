@@ -4,7 +4,7 @@ type CallData = {
   phonenum: number;
 };
 
-const CallScreen: React.FC = () => {
+const CallScreen: React.FC<CallData> = ({phonenum}) => {
   let scamBuzzWord = false;
   let body;
 
@@ -57,7 +57,7 @@ const CallScreen: React.FC = () => {
           00:20
         </p>
         <p className="text-5xl font-bold">
-          213 721 372
+          {phonenum}
         </p>
         <p className="text-3xl">
           Niezaufany numer

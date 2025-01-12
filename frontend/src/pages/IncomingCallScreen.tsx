@@ -3,14 +3,15 @@
 type IncomingCallScreenProps = {
   onAnswerCall: () => void; // Callback for answering the call
   onDenyCall: () => void; // Callback for denying the call
+  phoneNumber: string; // Phone number of the incoming call
 };
 
-const IncomingCallScreen: React.FC<IncomingCallScreenProps> = ({ onAnswerCall, onDenyCall }) => {
+const IncomingCallScreen: React.FC<IncomingCallScreenProps> = ({ onAnswerCall, onDenyCall, phoneNumber }) => {
   return (
     <div className="flex flex-col items-center gap-10 mt-10">
       <div className="flex flex-col items-center gap-4 text-center">
         <p className="text-5xl font-bold">
-          213 721 372
+          {phoneNumber}
         </p>
         <p className="text-3xl">
           Niezaufany numer dzwoni do ciebie

@@ -22,7 +22,7 @@ const DialKeypad: React.FC<DialKeypadProps> = ({ onCallPress }) => {
   // Function to handle the call button press
   const sendCall = async () => {
     const callData: CallData = {
-      phoneNumber: parseInt(input), // Convert the input string to a number
+      phonenum: parseInt(input), // Convert the input string to a number
     };
     onCallPress(callData);
   };
