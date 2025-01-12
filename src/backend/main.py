@@ -12,6 +12,7 @@ from backend.agents.fraud_detector import (
     TextFraudDetectorResponse,
 )
 from backend.llm.exalome import ExalomeLLM
+from backend.llm.openai_llm import OpenAILLM
 from backend.logging_config import setup_logging
 from backend.models import ContentScamRequest, EmailRequest, PhoneReputationRequest
 
@@ -20,16 +21,18 @@ setup_logging()
 logger = logging.getLogger(__name__)
 
 # Load environment variables
-load_dotenv()
+load_dotenv(dotenv_path=".env")
+
 COSTLESS = os.getenv("COSTLESS", "false").lower() == "true"
 GPU = os.getenv("GPU", "false").lower() == "true"
-API_KEY = os.getenv("API_KEY")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+print("Apikey", OPENAI_API_KEY)
+if COSTLESS and not OPENAI_API_KEY:
+    raise ValueError("OPENAI_API_KEY must be set when COSTLESS is true.")
 
 # Initialize LLM
 device = "cuda" if GPU else "cpu"
-llm = (
-    ExalomeLLM(device=device) if COSTLESS else ExalomeLLM(device=device)
-)  # TODO: Replace with OpenAI for paid API
+llm = ExalomeLLM(device=device) if COSTLESS else OpenAILLM(api_key=OPENAI_API_KEY)
 
 # Create TextFraudDetector agent
 fraud_detector = TextFraudDetector(llm=llm)
