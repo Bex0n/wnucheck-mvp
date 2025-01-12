@@ -23,15 +23,16 @@ export default function Home() {
   const [screenType, setScreenType] = useState("homescreen");
   const [popup, setPopup] = useState(null);
   const [incomingNumber, setIncomingNumber] = useState(213721372);
+  const [checkResult, setCheckResult] = useState(null);
 
   const incomingCallCallback = (data: CallData) => {
     setScreenType("incomingcall");
     setIncomingNumber(data.phonenum);
   }
-  const answerCallCallback = () => {
+  const setCallScreen = () => {
     setScreenType("call");
   }
-  const denyCallCallback = () => {
+  const setHomeScreen = () => {
     setScreenType("homescreen");
   }
 
@@ -48,7 +49,7 @@ export default function Home() {
           <div className="flex flex-col gap-8">
             <ChatWindow onChatMessage={setPopup} />
             <DialKeypad onCallPress={incomingCallCallback} />
-            {screenType === "call" && <AudioInput phoneNumber={incomingNumber} callType={"???"} callerId={"???"} />}
+            {screenType === "call" && <AudioInput phoneNumber={incomingNumber} callType={"???"} callerId={"???"} onCheckResult={setCheckResult}/>}
           </div>
         </div>
 
@@ -56,8 +57,8 @@ export default function Home() {
           <SmartPhone popup=
             {popup != null && (<NewMessagePopup dismiss={() => setPopup(null)} data={popup} />)}
           >
-            {screenType === "incomingcall" && <IncomingCallScreen phoneNumber={incomingNumber} onAnswerCall={answerCallCallback} onDenyCall={denyCallCallback} />}
-            {screenType === "call" && <CallScreen phonenum={incomingNumber} />}
+            {screenType === "incomingcall" && <IncomingCallScreen phoneNumber={incomingNumber} onAnswerCall={setCallScreen} onDenyCall={setHomeScreen}/>}
+            {screenType === "call" && <CallScreen phonenum={incomingNumber} scamCheckResult={checkResult} onHangUp={setHomeScreen}/>}
             {screenType === "homescreen" && <HomeScreen />}
           </SmartPhone>
         </div>

@@ -7,7 +7,7 @@ type AudioInputProps = {
   callerId: string;
 };
 
-const AudioInput : React.FC<AudioInputProps> = ({phoneNumber: phone_number, callType: call_type, callerId: caller_id}) => {
+const AudioInput: React.FC<AudioInputProps> = ({ phoneNumber: phone_number, callType: call_type, callerId: caller_id, onCheckResult }) => {
   const [isRecording, setIsRecording] = useState(false);
   const [audioBlob, setAudioBlob] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -80,14 +80,20 @@ const AudioInput : React.FC<AudioInputProps> = ({phoneNumber: phone_number, call
     }
   };
 
+  onCheckResult(response);
+
   return (
     <div>
       <h2>Phone Reputation Check</h2>
       <div>
         {!isRecording ? (
-          <button onClick={startRecording}>Start Recording</button>
+          <button
+            className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-800"
+            onClick={startRecording}>Start Recording</button>
         ) : (
-          <button onClick={stopRecording}>Stop Recording</button>
+          <button
+            className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-800"
+            onClick={stopRecording}>Stop Recording</button>
         )}
       </div>
 

@@ -21,6 +21,7 @@ const ChatWindow: React.FC<ChatWindowProps> = ({onChatMessage}) => {
       warningContent: "???",
       messageTitle: "213 721 372",
       messageContent: inputValue,
+      detectedScam: false,
     };
 
     try {
@@ -30,10 +31,11 @@ const ChatWindow: React.FC<ChatWindowProps> = ({onChatMessage}) => {
             sender_email: ""
           
           });
-      messagePopupData.warningTitle = response.data.is_scam ? "Uwaga!" : "";
+      messagePopupData.detectedScam = response.data.is_scam
+      messagePopupData.warningTitle = response.data.is_scam ? "Uwaga!" : "Ostrzeżenie";
       messagePopupData.warningContent = response.data.is_scam
-        ? "Numer nadawcy jest niezaufany. To może być próba oszustwa"
-        : "";
+        ? "Wiadomość wykryta jako niebezpieczna. To może być próba oszustwa"
+        : "Numer nadawcy jest niezaufany. Bądź czujny";
     } catch (error: AxiosError) {
       if (error.response?.status === 404) {
         console.error("Endpoint not found:", error.response?.data);
