@@ -45,10 +45,17 @@ export default function Home() {
       className={`${geistSans.variable} ${geistMono.variable} grid grid-rows-[20px_1fr_20px] items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]`}
     >
       <main className="grid grid-cols-3 gap-8 row-start-2 items-start w-full">
-        <div className="col-span-1 flex flex-col gap-8">
-	        <ChatWindow onChatMessage={setPopup}/>
-	        <DialKeypad onCallPress={incomingCallCallback}/>
+	<div className="col-span-1 flex flex-col gap-8 border-2 border-red-500 rounded-lg p-4 bg-gray-100 shadow-lg">
+	  <div className="text-xl font-semibold text-center text-gray-700 mb-4">
+	    Centrum skamera
+	  </div>
+	
+	  <div className="flex flex-col gap-8">
+	    <ChatWindow onChatMessage={setPopup} />
+	    <DialKeypad onCallPress={incomingCallCallback} />
+	  </div>
 	</div>
+
 	<div className="col-span-1 flex flex-col items-center gap-8">
         	<SmartPhone popup=
         	  {popup != null && (<NewMessagePopup dismiss={()=>setPopup(null)} data={popup}/>)}
