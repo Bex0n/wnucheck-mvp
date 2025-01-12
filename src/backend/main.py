@@ -3,7 +3,7 @@ import os
 import tempfile
 
 from dotenv import load_dotenv
-from fastapi import FastAPI, File, Form, UploadFile
+from fastapi import Depends, FastAPI, File, Form, UploadFile
 
 from backend.agents.phone_scam_agent import PhoneScamAgent, PhoneScamAgentMessage
 from backend.agents.text_fraud_agent import TextFraudDetector, TextFraudDetectorMessage
@@ -41,9 +41,7 @@ app = FastAPI()
 
 @app.post("/phone-reputation-check")
 async def phone_reputation_check(
-    phone_number: str = Form(...),
-    call_type: str = Form(...),
-    caller_id: str = Form(...),
+    request: PhoneReputationRequest = Depends(),
     audio: UploadFile = File(...),
 ):
     """Simulated phone reputation check with audio input."""
