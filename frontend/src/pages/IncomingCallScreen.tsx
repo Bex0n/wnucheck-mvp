@@ -1,6 +1,11 @@
 // components/IncomingCallScreen.tsx
 
-const IncomingCallScreen: React.FC = () => {
+type IncomingCallScreenProps = {
+  onAnswerCall: () => void; // Callback for answering the call
+  onDenyCall: () => void; // Callback for denying the call
+};
+
+const IncomingCallScreen: React.FC<IncomingCallScreenProps> = ({onAnswerCall, onDenyCall}) => {
   return (
     <div className="flex flex-col items-center gap-10">
       <div className="items-center gap-10">
@@ -18,10 +23,10 @@ const IncomingCallScreen: React.FC = () => {
         </div>
       </div>
       <div className="flex-auto flex space-x-4">
-        <button className="h-40 px-10 font-semibold rounded-md bg-slate-600 text-white hover:bg-slate-900" type="submit">
+        <button onClick={onAnswerCall} className="h-40 px-10 font-semibold rounded-md bg-slate-600 text-white hover:bg-slate-900" type="submit">
           Odbierz
         </button>
-        <button className="h-40 px-10 font-semibold rounded-md border border-red-700 text-red-700 hover:bg-red-900 hover:text-white" type="button">
+        <button onClick={onDenyCall} className="h-40 px-10 font-semibold rounded-md border border-red-700 text-red-700 hover:bg-red-900 hover:text-white" type="button">
           Odrzuć
         </button>
       </div>

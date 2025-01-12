@@ -4,6 +4,8 @@ import IncomingCallScreen from "./IncomingCallScreen";
 import { useState } from 'react';
 import NewMessagePopup, { PopupData } from "./NewMessagePopup";
 import ChatWindow from "./ChatWindow";
+import HomeScreen from "./HomeScreen";
+import CallScreen from "./CallScreen";
 
 
 
@@ -28,7 +30,13 @@ export default function Home() {
     messageTitle: "213 721 372",
     messageContent: "Hej dziadku, tu wnuczek pilnie potrzebuje pieniedzy przekazesz mi 2000zl prosze????!!",
   };
-  
+ 
+  const answerCallCallback = () => {
+    setScreenType("call");
+  }
+  const denyCallCallback = () => {
+    setScreenType("homescreen");
+  }
 
   return (
     <div
@@ -40,7 +48,9 @@ export default function Home() {
         <SmartPhone popup=
           {popup != null && (<NewMessagePopup data={popup}/>)}
           >
-        {screenType === "incomingcall" && <IncomingCallScreen />}
+        {screenType === "incomingcall" && <IncomingCallScreen onAnswerCall={answerCallCallback} onDenyCall={denyCallCallback}/>}
+        {screenType === "call" && <CallScreen />}
+        {screenType === "homescreen" && <HomeScreen />}
         </SmartPhone>
         <SmartPhone>
           <NewMessagePopup data={samplePopupData}/>
