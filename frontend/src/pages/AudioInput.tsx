@@ -2,18 +2,21 @@ import React, { useState, useRef } from "react";
 import axios from "axios";
 
 type AudioInputProps = {
-  phoneNumber: string;
+  phoneNumber: number;
   callType: string;
   callerId: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onCheckResult: (result: any) => void;
 };
 
 const AudioInput: React.FC<AudioInputProps> = ({ phoneNumber: phone_number, callType: call_type, callerId: caller_id, onCheckResult }) => {
   const [isRecording, setIsRecording] = useState(false);
-  const [audioBlob, setAudioBlob] = useState(null);
+  const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [response, setResponse] = useState(null);
-  const mediaRecorderRef = useRef(null); // Use ref to persist mediaRecorder state
-  const audioChunks = useRef([]); // To store audio chunks during recording
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [response, setResponse] = useState<any>(null);
+  const mediaRecorderRef : React.RefObject<MediaRecorder | null> = useRef(null); // Use ref to persist mediaRecorder state
+  const audioChunks : React.RefObject<Blob[]> = useRef([]); // To store audio chunks during recording
 
   // Start recording
   const startRecording = async () => {

@@ -2,9 +2,13 @@
 
 type CallData = {
   phonenum: number;
+  onHangUp?: () => void;
+  scamCheckResult?: {
+    is_scam: boolean;
+  };
 };
 
-const CallScreen: React.FC = ({phonenum, onHangUp, scamCheckResult}) => {
+const CallScreen: React.FC<CallData> = ({phonenum, onHangUp, scamCheckResult}) => {
   let body;
 
   if (scamCheckResult?.is_scam) {

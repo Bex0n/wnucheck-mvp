@@ -3,7 +3,7 @@
 type IncomingCallScreenProps = {
   onAnswerCall: () => void; // Callback for answering the call
   onDenyCall: () => void; // Callback for denying the call
-  phoneNumber: string; // Phone number of the incoming call
+  phoneNumber: number; // Phone number of the incoming call
 };
 
 const IncomingCallScreen: React.FC<IncomingCallScreenProps> = ({ onAnswerCall, onDenyCall, phoneNumber }) => {

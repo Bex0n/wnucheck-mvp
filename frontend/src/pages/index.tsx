@@ -2,7 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import SmartPhone from "@/pages/Smartphone";
 import IncomingCallScreen from "./IncomingCallScreen";
 import { useState } from 'react';
-import NewMessagePopup from "./NewMessagePopup";
+import NewMessagePopup, { PopupData } from "./NewMessagePopup";
 import ChatWindow from "./ChatWindow";
 import HomeScreen from "./HomeScreen";
 import CallScreen, { CallData } from "./CallScreen";
@@ -21,9 +21,9 @@ const geistMono = Geist_Mono({
 
 export default function Home() {
   const [screenType, setScreenType] = useState("homescreen");
-  const [popup, setPopup] = useState(null);
+  const [popup, setPopup] = useState<PopupData | null>(null);
   const [incomingNumber, setIncomingNumber] = useState(213721372);
-  const [checkResult, setCheckResult] = useState(null);
+  const [checkResult, setCheckResult] = useState(undefined);
 
   const incomingCallCallback = (data: CallData) => {
     setScreenType("incomingcall");

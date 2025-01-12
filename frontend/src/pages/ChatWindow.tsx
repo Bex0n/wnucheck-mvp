@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { PopupData } from "./NewMessagePopup";
+import axios from "axios";
 
 type ChatWindowProps = {
   onChatMessage: (message: PopupData) => void;
