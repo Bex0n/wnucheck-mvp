@@ -7,7 +7,7 @@ print("PYTHONPATH:", sys.path)
 import pytest
 
 from backend.agents.abstract_agent import AbstractAgent, AgentMessage, AgentResponse
-from backend.agents.fraud_detector import (
+from backend.agents.text_fraud_agent import (
     TextFraudDetector,
     TextFraudDetectorMessage,
     TextFraudDetectorResponse,

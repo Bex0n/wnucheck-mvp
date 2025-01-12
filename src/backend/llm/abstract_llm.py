@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 
-class AbstractLLM:
+class AbstractLLM(ABC):
     def __init__(self):
         pass
 
