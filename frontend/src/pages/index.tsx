@@ -30,6 +30,9 @@ export default function Home() {
     messageContent: "Hej dziadku, tu wnuczek pilnie potrzebuje pieniedzy przekazesz mi 2000zl prosze????!!",
   };
  
+  const incomingCallCallback = () => {
+    setScreenType("incomingcall");
+  }
   const answerCallCallback = () => {
     setScreenType("call");
   }
@@ -44,9 +47,8 @@ export default function Home() {
       <main className="grid grid-cols-3 gap-8 row-start-2 items-start w-full">
         <div className="col-span-1 flex flex-col gap-8">
 	        <ChatWindow onChatMessage={setPopup}/>
-	        <DialKeypad/>
+	        <DialKeypad onCallPress={incomingCallCallback}/>
 	</div>
-        {/* not intended to be left this way, just collecting these phone layouts in one place */}
 	<div className="col-span-1 flex flex-col items-center gap-8">
         	<SmartPhone popup=
         	  {popup != null && (<NewMessagePopup dismiss={()=>setPopup(null)} data={popup}/>)}
