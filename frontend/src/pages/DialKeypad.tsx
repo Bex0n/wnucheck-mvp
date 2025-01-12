@@ -45,15 +45,6 @@ const DialKeypad: React.FC<DialKeypadProps> = ({ onCallPress }) => {
             {i + 1}
           </button>
         ))}
-        <div className="w-16 h-16"></div>
-        <button
-          onClick={() => handleNumberClick("0")}
-          className="w-16 h-16 bg-white rounded-full text-xl font-bold shadow hover:bg-gray-300"
-        >
-          0
-        </button>
-        <div className="w-16 h-16"></div>
-
         {/* Backspace Button */}
         <button
           onClick={handleBackspace}
@@ -61,6 +52,13 @@ const DialKeypad: React.FC<DialKeypadProps> = ({ onCallPress }) => {
         >
           ←
         </button>
+        <button
+          onClick={() => handleNumberClick("0")}
+          className="w-16 h-16 bg-white rounded-full text-xl font-bold shadow hover:bg-gray-300"
+        >
+          0
+        </button>
+        <div className="w-16 h-16"></div>
       </div>
 
       {/* Call Button */}
